@@ -5,8 +5,10 @@ import moment from 'moment';
 import ClientView from './ClientView';
 import AvatarStatus from 'components/shared-components/AvatarStatus';
 import userData from "assets/data/user-list.data.json";
+import { connect } from 'react-redux';
+import { fetchClients } from 'redux/asyncActions/Clients';
 
-export class UserList extends Component {
+export class ClientList extends Component {
 
 	state = {
 		users: userData,
@@ -35,8 +37,13 @@ export class UserList extends Component {
     });
 	}
 
+	componentDidMount() {
+		this.props.getClients();
+	}
+
 	render() {
 		const { users, userProfileVisible, selectedUser } = this.state;
+		const { clients, isLoading } = this.props;
 
 		const tableColumns = [
 			{
@@ -104,4 +111,15 @@ export class UserList extends Component {
 	}
 }
 
-export default UserList
+const mapStateToProps = (state) => ({
+	isLoading: state.clients.isLoading,	
+	clients: state.clients.clients,	
+})
+
+const mapDispatchToProps = (dispatch) => ({
+	getClients() {
+	dispatch(fetchClients());
+	}
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ClientList)

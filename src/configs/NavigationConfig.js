@@ -20,7 +20,7 @@ const dashBoardNavTree = [{
       submenu: [
         {
           key: 'extra-pages-list',
-          path: `${APP_PREFIX_PATH}/clients/user-list`,
+          path: `${APP_PREFIX_PATH}/clients/client-list`,
           title: 'sidenav.clients.clientlist',
           icon: '',
           breadcrumb: true,
