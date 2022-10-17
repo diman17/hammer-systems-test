@@ -114,6 +114,8 @@
 	"sidenav.clients": "Clients",
 	"sidenav.clients.clientlist": "List of clients",
 
+	"sidenav.planner": "Planner",
+
 	"sidenav.authentication": "Authentication",
 	"sidenav.authentication.login.1": "Login 1",
 	"sidenav.authentication.login.2": "Login 2",

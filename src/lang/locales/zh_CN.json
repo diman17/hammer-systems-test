@@ -114,6 +114,8 @@
     "sidenav.clients": "客户",
 	"sidenav.clients.clientlist": "客户名单",
 
+    "sidenav.planner": "规划师",
+
     "sidenav.authentication": "认证",
 	"sidenav.authentication.login.1": "登录页 1",
 	"sidenav.authentication.login.2": "登录页 2",

@@ -27,6 +27,14 @@ const dashBoardNavTree = [{
           submenu: []
         },
       ]
+    },
+    {
+      key: 'planner',
+      path: `${APP_PREFIX_PATH}/planner`,
+      title: 'sidenav.planner',
+      icon: FileTextOutlined,
+      breadcrumb: true,
+      submenu: []
     }
   ]
 }]
