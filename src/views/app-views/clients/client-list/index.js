@@ -1,60 +1,29 @@
 import React, { Component } from 'react'
-import { Card, Table, Tag, Tooltip, message, Button } from 'antd';
-import { EyeOutlined, DeleteOutlined } from '@ant-design/icons';
-import moment from 'moment';
-import ClientView from './ClientView';
-import AvatarStatus from 'components/shared-components/AvatarStatus';
-import userData from "assets/data/user-list.data.json";
+import { Card, Table, Tooltip, message, Button } from 'antd';
+import { DeleteOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { fetchClients } from 'redux/asyncActions/Clients';
 import Loading from 'components/shared-components/Loading';
+import { deleteClient } from 'redux/actions/Clients';
 
 export class ClientList extends Component {
-
-	state = {
-		users: userData,
-		userProfileVisible: false,
-		selectedUser: null
-	}
-
-	deleteUser = userId => {
-		this.setState({
-			users: this.state.users.filter(item => item.id !== userId),
-		})
-		message.success({ content: `Deleted user ${userId}`, duration: 2 });
-	}
-
-	showUserProfile = userInfo => {
-		this.setState({
-			userProfileVisible: true,
-			selectedUser: userInfo
-		});
-	};
-	
-	closeUserProfile = () => {
-		this.setState({
-			userProfileVisible: false,
-			selectedUser: null
-    });
-	}
 
 	componentDidMount() {
 		this.props.getClients();
 	}
 
+	deleteClient = client => {
+		this.props.deleteClient(client.id)
+		message.success({ content: `Deleted client ${client.name}`, duration: 2 });
+	}
+
 	render() {
-		const { users, userProfileVisible, selectedUser } = this.state;
 		const { clients, isLoading } = this.props;
 
 		const tableColumns = [
 			{
-				title: 'User',
+				title: 'Client',
 				dataIndex: 'name',
-				render: (_, record) => (
-					<div className="d-flex">
-						<AvatarStatus src={record.img} name={record.name} subTitle={record.email}/>
-					</div>
-				),
 				sorter: {
 					compare: (a, b) => {
 						a = a.name.toLowerCase();
@@ -64,28 +33,39 @@ export class ClientList extends Component {
 				},
 			},
 			{
-				title: 'Role',
-				dataIndex: 'role',
+				title: 'UserName',
+				dataIndex: 'username',
 				sorter: {
-					compare: (a, b) => a.role.length - b.role.length,
+					compare: (a, b) => {
+						a = a.username.toLowerCase();
+  						b = b.username.toLowerCase();
+						return a > b ? -1 : b > a ? 1 : 0;
+					},
 				},
 			},
 			{
-				title: 'Last online',
-				dataIndex: 'lastOnline',
-				render: date => (
-					<span>{moment.unix(date).format("MM/DD/YYYY")} </span>
-				),
-				sorter: (a, b) => moment(a.lastOnline).unix() - moment(b.lastOnline).unix()
+				title: 'Email',
+				dataIndex: 'email',
+				sorter: {
+					compare: (a, b) => {
+						a = a.email.toLowerCase();
+  						b = b.email.toLowerCase();
+						return a > b ? -1 : b > a ? 1 : 0;
+					},
+				},
 			},
 			{
-				title: 'Status',
-				dataIndex: 'status',
-				render: status => (
-					<Tag className ="text-capitalize" color={status === 'active'? 'cyan' : 'red'}>{status}</Tag>
+				title: 'City',
+				dataIndex: 'city',
+				render: (_, elm) => (
+					<span>{elm.address.city}</span>
 				),
 				sorter: {
-					compare: (a, b) => a.status.length - b.status.length,
+					compare: (a, b) => {
+						a = a.company.name.toLowerCase();
+  						b = b.company.name.toLowerCase();
+						return a > b ? -1 : b > a ? 1 : 0;
+					},
 				},
 			},
 			{
@@ -93,11 +73,12 @@ export class ClientList extends Component {
 				dataIndex: 'actions',
 				render: (_, elm) => (
 					<div className="text-right">
-						<Tooltip title="View">
-							<Button type="primary" className="mr-2" icon={<EyeOutlined />} onClick={() => {this.showUserProfile(elm)}} size="small"/>
-						</Tooltip>
 						<Tooltip title="Delete">
-							<Button danger icon={<DeleteOutlined />} onClick={()=> {this.deleteUser(elm.id)}} size="small"/>
+							<Button danger icon={<DeleteOutlined />} onClick={(event)=> {
+								event.stopPropagation();
+								this.deleteClient(elm)
+								}
+							} size="small"/>
 						</Tooltip>
 					</div>
 				)
@@ -110,9 +91,8 @@ export class ClientList extends Component {
 			)
 		}
 		return (
-			<Card bodyStyle={{'padding': '0px'}}>
-				<Table columns={tableColumns} dataSource={users} rowKey='id' />
-				<ClientView data={selectedUser} visible={userProfileVisible} close={()=> {this.closeUserProfile()}}/>
+			<Card onClick={() => console.log('navigate to Edit Profile')} bodyStyle={{'padding': '0px'}}>
+				<Table columns={tableColumns} dataSource={clients} rowKey='id' />
 			</Card>
 		)
 	}
@@ -126,6 +106,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
 	getClients() {
 	dispatch(fetchClients());
+	},
+	deleteClient(id) {
+		dispatch(deleteClient(id))
 	}
 })
 

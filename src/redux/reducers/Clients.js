@@ -1,4 +1,4 @@
-import { FETCH_CLIENTS, FETCH_CLIENTS_SUCCESS } from "redux/constants/Clients";
+import { DELETE_CLIENT, FETCH_CLIENTS, FETCH_CLIENTS_SUCCESS } from "redux/constants/Clients";
 
 const initState = {
     isLoading: false,
@@ -17,6 +17,14 @@ const clients = (state = initState, action) => {
                 ...state,
                 isLoading: false,
                 clients: [...action.payload]
+            }
+        case DELETE_CLIENT:
+            const index = state.clients.findIndex((client) => client.id === action.payload)
+            const updateclients = [...state.clients]
+            updateclients.splice(index, 1)
+            return {
+                ...state,
+                clients: [...updateclients]
             }
         default:
             return state;
