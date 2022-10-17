@@ -7,6 +7,7 @@ import AvatarStatus from 'components/shared-components/AvatarStatus';
 import userData from "assets/data/user-list.data.json";
 import { connect } from 'react-redux';
 import { fetchClients } from 'redux/asyncActions/Clients';
+import Loading from 'components/shared-components/Loading';
 
 export class ClientList extends Component {
 
@@ -102,6 +103,12 @@ export class ClientList extends Component {
 				)
 			}
 		];
+
+		if(isLoading) {
+			return (
+				<Loading cover='content' />
+			)
+		}
 		return (
 			<Card bodyStyle={{'padding': '0px'}}>
 				<Table columns={tableColumns} dataSource={users} rowKey='id' />
