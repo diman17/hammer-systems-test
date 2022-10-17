@@ -1,4 +1,4 @@
-import { DELETE_CLIENT, FETCH_CLIENTS, FETCH_CLIENTS_SUCCESS } from "redux/constants/Clients";
+import { DELETE_CLIENT, FETCH_CLIENTS, FETCH_CLIENTS_SUCCESS, UPDATE_CLIENT, UPDATE_CLIENT_SUCCESS } from "redux/constants/Clients";
 
 const initState = {
     isLoading: false,
@@ -25,6 +25,17 @@ const clients = (state = initState, action) => {
             return {
                 ...state,
                 clients: [...updateclients]
+            }
+        case UPDATE_CLIENT:
+            return {
+                ...state,
+                isLoading: true
+            }
+        case UPDATE_CLIENT_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                clients: [...state.clients]
             }
         default:
             return state;

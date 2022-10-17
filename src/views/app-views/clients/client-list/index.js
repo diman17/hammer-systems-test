@@ -2,13 +2,19 @@ import React, { Component } from 'react'
 import { Card, Table, Tooltip, message, Button } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
-import { fetchClients } from 'redux/asyncActions/Clients';
+import { fetchClients, updateClient } from 'redux/asyncActions/Clients';
 import Loading from 'components/shared-components/Loading';
 import { deleteClient } from 'redux/actions/Clients';
+import EditClient from './EditClient';
 
 export class ClientList extends Component {
 
-	componentDidMount() {
+	state = {
+		clickedClient: null,
+		editClientVisible: false,
+	}
+
+	componentDidMount = () => {
 		this.props.getClients();
 	}
 
@@ -17,8 +23,15 @@ export class ClientList extends Component {
 		message.success({ content: `Deleted client ${client.name}`, duration: 2 });
 	}
 
+	onCloseEditClient = () => {
+		this.setState({
+			clickedClient: null,
+			editClientVisible: false
+		})
+	}
+
 	render() {
-		const { clients, isLoading } = this.props;
+		const { clients, isLoading, updateClient } = this.props;
 
 		const tableColumns = [
 			{
@@ -90,9 +103,19 @@ export class ClientList extends Component {
 				<Loading cover='content' />
 			)
 		}
+
+		if(this.state.editClientVisible) {
+			return (
+				<EditClient client={this.state.clickedClient} onCloseEditClient={this.onCloseEditClient} updateClient={updateClient}  />
+			)
+		}
+
 		return (
-			<Card onClick={() => console.log('navigate to Edit Profile')} bodyStyle={{'padding': '0px'}}>
-				<Table columns={tableColumns} dataSource={clients} rowKey='id' />
+			<Card bodyStyle={{'padding': '0px'}}>
+				<Table onRow={(record) => ({onClick: () => this.setState({
+					clickedClient: record,
+					editClientVisible: true
+				})})} columns={tableColumns} dataSource={clients} rowKey='id' />
 			</Card>
 		)
 	}
@@ -105,11 +128,14 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
 	getClients() {
-	dispatch(fetchClients());
+		dispatch(fetchClients());
 	},
 	deleteClient(id) {
 		dispatch(deleteClient(id))
-	}
+	},
+	updateClient() {
+		dispatch(updateClient());
+	},
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ClientList)
