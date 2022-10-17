@@ -111,6 +111,9 @@
     "sidenav.pages.setting": "设置",
     "sidenav.pages.userlist": "用户清单",
 
+    "sidenav.clients": "客户",
+	"sidenav.clients.clientlist": "客户名单",
+
     "sidenav.authentication": "认证",
 	"sidenav.authentication.login.1": "登录页 1",
 	"sidenav.authentication.login.2": "登录页 2",

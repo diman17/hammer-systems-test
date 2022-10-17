@@ -111,6 +111,9 @@
     "sidenav.pages.setting": "Réglage",
     "sidenav.pages.userlist": "Liste d'utilisateur",
 
+    "sidenav.clients": "Clients",
+	"sidenav.clients.clientlist": "Liste de clients",
+
     "sidenav.authentication": "Authentification",
 	"sidenav.authentication.login.1": "S'identifier 1",
 	"sidenav.authentication.login.2": "S'identifier 2",
