@@ -1,18 +1,17 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import { useDrop } from 'react-dnd'
 import { findDOMNode } from 'react-dom'
 import roomImage from '../../../assets/planner/room.jpg'
 import { plannerObjects } from './data/data'
 import PlannerObject from './PlannerObject'
 
-const PlannerRoom = () => {
+const PlannerRoom = ({ room, setRoom }) => {
     const styleRoom = {
         position: 'relative',
         width: '520px',
         height: '520px'
     }
 
-    const [room, setRoom] = useState([])
     const image = useRef()
 
     const [, drop] = useDrop(() => ({
