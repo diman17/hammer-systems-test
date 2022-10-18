@@ -52,8 +52,8 @@ const Planner = () => {
 
 	return (
 		<DndProvider backend={HTML5Backend}>
-			<Row gutter={ROW_GUTTER} wrap={true} justify='space-between'>
-				<Col flex='520px'>
+			<Row gutter={ROW_GUTTER} wrap={true} justify={'center'}>
+				<Col xs={24} sm={24} md={16} lg={16} xl={12} xxl={12}>
 					<Card>
 						<Tabs defaultActiveKey="1">
 							<TabPane tab="Armchairs" key="1">
@@ -70,7 +70,7 @@ const Planner = () => {
 									)}
 								/>	
 							</TabPane>
-							<TabPane tab="sofas" key="2">
+							<TabPane tab="Sofas" key="2">
 								<List
 									itemLayout="vertical"
 									grid={{gutter: ROW_GUTTER}}
@@ -84,7 +84,7 @@ const Planner = () => {
 									)}
 								/>	
 							</TabPane>
-							<TabPane tab="tables" key="3">
+							<TabPane tab="Tables" key="3">
 								<List
 									itemLayout="vertical"
 									grid={{gutter: ROW_GUTTER}}
@@ -113,7 +113,7 @@ const Planner = () => {
 						</Space>
 					</Card>
 				</Col>
-				<Col>
+				<Col xs={24} sm={24} md={24} lg={24} xl={12} xxl={12}>
 					<PlannerRoom room={room} setRoom={setRoom} />
 				</Col>
 			</Row>

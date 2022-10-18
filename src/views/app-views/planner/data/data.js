@@ -1,7 +1,6 @@
 import sofa1 from '../../../../assets/planner//sofas/sofa1.png'
 import sofa2 from '../../../../assets/planner//sofas/sofa2.png'
 import sofa3 from '../../../../assets/planner//sofas/sofa3.png'
-import sofa4 from '../../../../assets/planner//sofas/sofa4.png'
 import armchair1 from '../../../../assets/planner/armchairs/armchair1.png'
 import armchair2 from '../../../../assets/planner/armchairs/armchair2.png'
 import armchair3 from '../../../../assets/planner/armchairs/armchair3.png'
@@ -33,22 +32,13 @@ export const plannerObjects = [
         id: 3,
         top: 0,
         left: 0,
-        width: 208,
-        height: 172,
+        width: 154,
+        height: 88,
         type: plannerObjectType.SOFA,
         img: sofa3
     },
     {
         id: 4,
-        top: 0,
-        left: 0,
-        width: 154,
-        height: 88,
-        type: plannerObjectType.SOFA,
-        img: sofa4
-    },
-    {
-        id: 5,
         top: 0,
         left: 0,
         width: 82,
@@ -57,7 +47,7 @@ export const plannerObjects = [
         img: armchair1
     },
     {
-        id: 6,
+        id: 5,
         top: 0,
         left: 0,
         width: 78,
@@ -66,7 +56,7 @@ export const plannerObjects = [
         img: armchair2
     },
     {
-        id: 7,
+        id: 6,
         top: 0,
         left: 0,
         width: 76,
@@ -75,7 +65,7 @@ export const plannerObjects = [
         img: armchair3
     },
     {
-        id: 8,
+        id: 7,
         top: 0,
         left: 0,
         width: 96,
@@ -84,7 +74,7 @@ export const plannerObjects = [
         img: armchair4
     },
     {
-        id: 9,
+        id: 8,
         top: 0,
         left: 0,
         width: 93,
@@ -93,7 +83,7 @@ export const plannerObjects = [
         img: table1
     },
     {
-        id: 10,
+        id: 9,
         top: 0,
         left: 0,
         width: 68,

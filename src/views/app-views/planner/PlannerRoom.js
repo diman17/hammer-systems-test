@@ -56,26 +56,28 @@ const PlannerRoom = ({ room, setRoom }) => {
     }
 
     return (
-        <div style={styleRoom} ref={drop}>
-            <img 
-                ref={image} 
-                style={{
-                    'position': 'absolute',
-                    'zIndex': '-1'
-                }} 
-                src={roomImage} 
-                alt="room" 
-            />
-            {room.map((obj, index) => (
-                <PlannerObject 
-                    key={index} 
-                    id={obj.id} 
-                    img={obj.img} 
-                    top={obj.top} 
-                    left={obj.left} 
-                    isSet={obj.isSet}
+        <div style={{display: 'flex', justifyContent: 'center'}}>
+            <div style={styleRoom} ref={drop}>
+                <img 
+                    ref={image} 
+                    style={{
+                        'position': 'absolute',
+                        'zIndex': '-1'
+                    }} 
+                    src={roomImage} 
+                    alt="room" 
                 />
-            ))}
+                {room.map((obj, index) => (
+                    <PlannerObject 
+                        key={index} 
+                        id={obj.id} 
+                        img={obj.img} 
+                        top={obj.top} 
+                        left={obj.left} 
+                        isSet={obj.isSet}
+                    />
+                ))}
+            </div>
         </div>
     )
 }
